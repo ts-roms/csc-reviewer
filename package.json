@@ -1,0 +1,20 @@
+{
+  "name": "csc-exam-review",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CSC (Civil Service Commission) Exam Review app for the Philippines — questions by section with answer keys.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.3.3"
+  }
+}
