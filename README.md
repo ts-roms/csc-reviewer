@@ -12,8 +12,9 @@ A React + Vite study app for the **Philippine Civil Service Examination** (Caree
 | 🗂️ Clerical Operations | Filing, alphabetizing, attention to detail (Sub-Professional) |
 | 🇵🇭 General Information | 1987 Constitution, RA 6713, peace & human rights, environmental laws |
 | 📚 Pang-unawa sa Pagbasa (Filipino) | Filipino reading-comprehension passages with main-idea, vocabulary-in-context, and inference questions |
+| 📰 Reading Comprehension (English) | English passages with main-idea, detail, vocabulary-in-context, and inference questions |
 
-**224 questions** in total (45 Verbal · 45 Numerical · 45 Analytical · 30 Clerical · 50 General Information · 9 Filipino reading comprehension). Every question carries a written **explanation** that appears when you reveal the answer in Study mode or after submitting a Quiz/Mock Exam. The General Information section includes recently emphasized laws (RA 11032 Ease of Doing Business, RA 11313 Safe Spaces Act, RA 11223 Universal Health Care, RA 11210 Expanded Maternity Leave, RA 9710 Magna Carta of Women, RA 11479 Anti-Terrorism Act, and more).
+**271 questions** in total (50 Verbal · 50 Numerical · 50 Analytical · 50 Clerical · 50 General Information · 9 Filipino reading comprehension · 12 English reading comprehension). Every question carries a written **explanation** that appears when you reveal the answer in Study mode or after submitting a Quiz/Mock Exam. The General Information section includes recently emphasized laws (RA 11032 Ease of Doing Business, RA 11313 Safe Spaces Act, RA 11223 Universal Health Care, RA 11210 Expanded Maternity Leave, RA 9710 Magna Carta of Women, RA 11479 Anti-Terrorism Act, and more).
 
 > ℹ️ These are original **practice** questions written to match the current CSC exam coverage. The Civil Service Commission does not publicly release actual past exam questions, so no item here is a real/leaked exam question.
 

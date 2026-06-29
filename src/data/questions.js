@@ -1527,6 +1527,194 @@ export const sections = [
         answer: 2,
         explanation: 'The correct spelling is "Acknowledge" (with a "d"); "Acknowlege" is wrong.',
       },
+      {
+        id: 'cl31',
+        text: 'Arrange alphabetically. Which surname comes LAST?',
+        options: ['Bautista', 'Bautisto', 'Bautisita', 'Bautistia'],
+        answer: 1,
+        explanation:
+          'Comparing letter by letter after "Bautis": "Bautisita" < "Bautista" < "Bautistia" < "Bautisto". "Bautisto" comes last.',
+      },
+      {
+        id: 'cl32',
+        text: 'Which code is EXACTLY identical to: PSA-2024-CRS-0098 ?',
+        options: [
+          'PSA-2024-CRS-0098',
+          'PSA-2024-CSR-0098',
+          'PSA-2024-CRS-0089',
+          'PSA-2042-CRS-0098',
+        ],
+        answer: 0,
+        explanation:
+          'Only the first matches exactly. Others swap CRS→CSR, transpose 0098→0089, or change 2024→2042.',
+      },
+      {
+        id: 'cl33',
+        text: 'How many times does the digit "7" appear in: 7,717,070,277 ?',
+        options: ['4', '5', '6', '7'],
+        answer: 2,
+        explanation:
+          'Digits: 7-7-1-7-0-7-0-2-7-7. The 7s are at positions 1,2,4,6,9,10 — that is 6 sevens.',
+      },
+      {
+        id: 'cl34',
+        text: 'Find the misspelled word.',
+        options: ['Privilege', 'Forty', 'Truely', 'Argument'],
+        answer: 2,
+        explanation: 'The correct spelling is "Truly" (no "e"); "Truely" is wrong.',
+      },
+      {
+        id: 'cl35',
+        text: 'Which set of numbers is in correct ASCENDING order?',
+        options: [
+          '1205, 1025, 1052, 1250',
+          '1025, 1052, 1205, 1250',
+          '1025, 1205, 1052, 1250',
+          '1250, 1205, 1052, 1025',
+        ],
+        answer: 1,
+        explanation: 'Ascending: 1025 < 1052 < 1205 < 1250.',
+      },
+      {
+        id: 'cl36',
+        text: 'Identify the row where the two entries DO NOT match.',
+        options: [
+          'Civil Service Commission  /  Civil Service Commission',
+          'Examinee No. 5521  /  Examinee No. 5521',
+          'Room 304-B  /  Room 304-D',
+          'Batch 2025-01  /  Batch 2025-01',
+        ],
+        answer: 2,
+        explanation: '"Room 304-B" vs "Room 304-D" differ in the last letter (B vs D).',
+      },
+      {
+        id: 'cl37',
+        text: 'Which date is the LATEST? (Format: MM/DD/YYYY)',
+        options: ['07/04/2024', '06/30/2025', '07/04/2023', '12/25/2024'],
+        answer: 1,
+        explanation:
+          'Compare years first: 06/30/2025 is in 2025, later than any 2023 or 2024 date. It is the latest.',
+      },
+      {
+        id: 'cl38',
+        text: 'Arrange alphabetically. Which surname comes FIRST?',
+        options: ['Tan', 'Tanchanco', 'Tanco', 'Tang'],
+        answer: 0,
+        explanation:
+          'A shorter word that is a prefix of others files first: "Tan" < "Tanc..." < "Tang". "Tan" comes first.',
+      },
+      {
+        id: 'cl39',
+        text: 'Which pair is EXACTLY the same?',
+        options: [
+          'l1lI-0O0  /  l1lI-0O0',
+          'l1Il-0O0  /  l1lI-0O0',
+          'l1lI-00O  /  l1lI-0O0',
+          'l1lI-0OO  /  l1lI-0O0',
+        ],
+        answer: 0,
+        explanation:
+          'Only the first pair is character-for-character identical; the rest transpose look-alike characters.',
+      },
+      {
+        id: 'cl40',
+        text: 'Find the misspelled word.',
+        options: ['Committee', 'Recieve', 'Beginning', 'Successful'],
+        answer: 1,
+        explanation: 'The correct spelling is "Receive" (e before i after c); "Recieve" is wrong.',
+      },
+      {
+        id: 'cl41',
+        text: 'In numeric filing, which file comes FIRST (lowest)?',
+        options: ['305128', '305182', '305081', '305018'],
+        answer: 3,
+        explanation: 'Ascending: 305018 < 305081 < 305128 < 305182. So 305018 comes first.',
+      },
+      {
+        id: 'cl42',
+        text: 'How many times does the word "the" appear: "THE cat saw THE dog near THE gate"?',
+        options: ['2', '3', '4', '5'],
+        answer: 1,
+        explanation: 'The word "the" appears 3 times.',
+      },
+      {
+        id: 'cl43',
+        text: 'Arrange alphabetically. Which surname comes LAST?',
+        options: ['Ocampo', 'Ocana', 'Ochoa', 'Ocariza'],
+        answer: 2,
+        explanation:
+          'Comparing the third letter: "Oca..." entries precede "Och...". "Ochoa" comes last.',
+      },
+      {
+        id: 'cl44',
+        text: 'Which code is EXACTLY identical to: TIN-432-908-115 ?',
+        options: [
+          'TIN-432-908-115',
+          'TIN-432-908-151',
+          'TIN-423-908-115',
+          'TIN-432-980-115',
+        ],
+        answer: 0,
+        explanation: 'Only the first option matches every group of digits exactly.',
+      },
+      {
+        id: 'cl45',
+        text: 'Which set is in correct DESCENDING order?',
+        options: [
+          '67, 76, 60, 70',
+          '76, 70, 67, 60',
+          '60, 67, 70, 76',
+          '70, 76, 67, 60',
+        ],
+        answer: 1,
+        explanation: 'Descending (largest first): 76 > 70 > 67 > 60.',
+      },
+      {
+        id: 'cl46',
+        text: 'Find the misspelled word.',
+        options: ['Tomorrow', 'Wednesday', 'Febuary', 'Calendar'],
+        answer: 2,
+        explanation: 'The correct spelling is "February" (with the first "r"); "Febuary" is wrong.',
+      },
+      {
+        id: 'cl47',
+        text: 'Identify the row where the two entries DO NOT match.',
+        options: [
+          'DepEd Order 12  /  DepEd Order 12',
+          'CSC MC No. 14  /  CSC MC No. 41',
+          'EO 292  /  EO 292',
+          'Proclamation 1081  /  Proclamation 1081',
+        ],
+        answer: 1,
+        explanation: '"CSC MC No. 14" vs "CSC MC No. 41" differ (14 vs 41).',
+      },
+      {
+        id: 'cl48',
+        text: 'Arrange alphabetically. Which name comes FIRST? (By surname, then first name.)',
+        options: ['Cruz, Mary Ann', 'Cruz, Maria', 'Cruz, Mariano', 'Cruz, Marie'],
+        answer: 1,
+        explanation:
+          'After "Cruz, Mar": "Maria" < "Mariano" < "Marie" < "Mary Ann" (compare i vs y; "Mari" before "Mary"). Among the "Mari" group, "Maria" precedes "Mariano" and "Marie". "Cruz, Maria" comes first.',
+      },
+      {
+        id: 'cl49',
+        text: 'Which pair is EXACTLY the same?',
+        options: [
+          '5,280 ft  /  5,820 ft',
+          '12:45 PM  /  12:45 PM',
+          'Lot 7-A  /  Lot 7-Á',
+          'No. 0095  /  No. 0059',
+        ],
+        answer: 1,
+        explanation: 'Only "12:45 PM / 12:45 PM" matches exactly.',
+      },
+      {
+        id: 'cl50',
+        text: 'In a list sorted by ZIP code, which entry comes FIRST?',
+        options: ['1101', '1008', '1010', '1100'],
+        answer: 1,
+        explanation: 'Ascending: 1008 < 1010 < 1100 < 1101. So 1008 comes first.',
+      },
     ],
   },
   {
@@ -2112,6 +2300,174 @@ export const sections = [
         answer: 1,
         explanation:
           'Dahil sinisira ng katiwalian ang serbisyo, makatuwirang ihinuha na dapat itong labanan upang mapabuti ang serbisyo publiko.',
+      },
+    ],
+  },
+  {
+    id: 'reading',
+    title: 'Reading Comprehension (English)',
+    description:
+      'Passage-based questions testing main idea, supporting details, vocabulary in context, and inference.',
+    icon: '📰',
+    questions: [
+      {
+        id: 'rc1',
+        passage:
+          'Good time management is not about doing more tasks in less time. It is about deciding which tasks truly matter and giving them your full attention. People who manage time well often do fewer things, but they finish them with greater quality. They also build in short breaks, because rest restores the focus that long hours alone cannot.',
+        text: 'What is the MAIN idea of the passage?',
+        options: [
+          'Doing as many tasks as possible is the goal.',
+          'Effective time management means focusing on what matters, not just doing more.',
+          'Breaks are a waste of working time.',
+          'Quality is less important than speed.',
+        ],
+        answer: 1,
+        explanation:
+          'The passage argues that managing time well is about choosing important tasks and doing them with quality — not simply doing more.',
+      },
+      {
+        id: 'rc2',
+        passage:
+          'Good time management is not about doing more tasks in less time. It is about deciding which tasks truly matter and giving them your full attention. People who manage time well often do fewer things, but they finish them with greater quality. They also build in short breaks, because rest restores the focus that long hours alone cannot.',
+        text: 'According to the passage, why do good time managers take short breaks?',
+        options: [
+          'To avoid finishing their work',
+          'Because rest restores focus',
+          'To do more tasks at once',
+          'Because the rules require it',
+        ],
+        answer: 1,
+        explanation:
+          'The passage states that breaks help "because rest restores the focus that long hours alone cannot."',
+      },
+      {
+        id: 'rc3',
+        passage:
+          'Good time management is not about doing more tasks in less time. It is about deciding which tasks truly matter and giving them your full attention. People who manage time well often do fewer things, but they finish them with greater quality. They also build in short breaks, because rest restores the focus that long hours alone cannot.',
+        text: 'In the passage, the word "restores" most nearly means:',
+        options: ['removes', 'brings back', 'wastes', 'delays'],
+        answer: 1,
+        explanation:
+          '"Restores the focus" means it brings the focus back — i.e., renews or recovers it.',
+      },
+      {
+        id: 'rc4',
+        passage:
+          'When a strong typhoon approaches, local officials issue warnings and prepare evacuation centers. Families in low-lying areas are advised to move early, before roads become impassable. Those who wait until the water rises often find rescue far more difficult and dangerous, both for themselves and for the responders who must reach them.',
+        text: 'What can be INFERRED about evacuating early?',
+        options: [
+          'It is unnecessary if you live near a river.',
+          'It is safer and makes rescue less dangerous.',
+          'It is only for local officials.',
+          'It increases the risk of flooding.',
+        ],
+        answer: 1,
+        explanation:
+          'Since waiting makes rescue "more difficult and dangerous," it follows that moving early is safer for residents and responders alike.',
+      },
+      {
+        id: 'rc5',
+        passage:
+          'When a strong typhoon approaches, local officials issue warnings and prepare evacuation centers. Families in low-lying areas are advised to move early, before roads become impassable. Those who wait until the water rises often find rescue far more difficult and dangerous, both for themselves and for the responders who must reach them.',
+        text: 'According to the passage, who prepares the evacuation centers?',
+        options: ['The families', 'Local officials', 'The responders only', 'The national government'],
+        answer: 1,
+        explanation: 'The passage states that "local officials issue warnings and prepare evacuation centers."',
+      },
+      {
+        id: 'rc6',
+        passage:
+          'When a strong typhoon approaches, local officials issue warnings and prepare evacuation centers. Families in low-lying areas are advised to move early, before roads become impassable. Those who wait until the water rises often find rescue far more difficult and dangerous, both for themselves and for the responders who must reach them.',
+        text: 'In the passage, the word "impassable" most nearly means:',
+        options: ['easy to cross', 'impossible to travel on', 'newly built', 'very wide'],
+        answer: 1,
+        explanation:
+          '"Roads become impassable" means they can no longer be traveled — impossible to pass through.',
+      },
+      {
+        id: 'rc7',
+        passage:
+          'A new public library opened in the town, but at first only a few people visited. Instead of giving up, the librarian started free weekend storytelling sessions for children. Soon, parents came along, discovered the books, and began borrowing them. Within a year, the once-empty reading room was full almost every day.',
+        text: 'What is the BEST title for this passage?',
+        options: [
+          'The Cost of Building Libraries',
+          'How a Simple Idea Revived a Library',
+          'Why Children Dislike Reading',
+          'The History of Public Libraries',
+        ],
+        answer: 1,
+        explanation:
+          'The passage describes how the librarian\'s storytelling idea turned an empty library into a busy one — a story of revival through a simple idea.',
+      },
+      {
+        id: 'rc8',
+        passage:
+          'A new public library opened in the town, but at first only a few people visited. Instead of giving up, the librarian started free weekend storytelling sessions for children. Soon, parents came along, discovered the books, and began borrowing them. Within a year, the once-empty reading room was full almost every day.',
+        text: 'What FIRST attracted more people to the library?',
+        options: [
+          'Free meals',
+          'Weekend storytelling sessions for children',
+          'New computers',
+          'A larger building',
+        ],
+        answer: 1,
+        explanation:
+          'The turning point was the librarian starting "free weekend storytelling sessions for children," which drew parents too.',
+      },
+      {
+        id: 'rc9',
+        passage:
+          'A new public library opened in the town, but at first only a few people visited. Instead of giving up, the librarian started free weekend storytelling sessions for children. Soon, parents came along, discovered the books, and began borrowing them. Within a year, the once-empty reading room was full almost every day.',
+        text: 'What does the librarian\'s response BEST show?',
+        options: ['Carelessness', 'Resourcefulness', 'Selfishness', 'Impatience'],
+        answer: 1,
+        explanation:
+          'Rather than giving up, the librarian found a creative solution — showing resourcefulness.',
+      },
+      {
+        id: 'rc10',
+        passage:
+          'Teamwork in a government office depends on clear communication. When each member knows the goal and shares information openly, tasks are completed faster and with fewer errors. Problems usually arise not from a lack of skill, but from misunderstandings that could have been avoided with a simple conversation.',
+        text: 'According to the passage, most problems in teamwork arise from:',
+        options: [
+          'Lack of skill',
+          'Misunderstandings',
+          'Too many meetings',
+          'Working too quickly',
+        ],
+        answer: 1,
+        explanation:
+          'The passage states problems usually arise "not from a lack of skill, but from misunderstandings."',
+      },
+      {
+        id: 'rc11',
+        passage:
+          'Teamwork in a government office depends on clear communication. When each member knows the goal and shares information openly, tasks are completed faster and with fewer errors. Problems usually arise not from a lack of skill, but from misunderstandings that could have been avoided with a simple conversation.',
+        text: 'What is the writer\'s main point?',
+        options: [
+          'Skill does not matter in an office.',
+          'Clear communication is key to effective teamwork.',
+          'Government offices should hire more people.',
+          'Meetings always cause problems.',
+        ],
+        answer: 1,
+        explanation:
+          'The passage emphasizes that teamwork "depends on clear communication" to work faster and with fewer errors.',
+      },
+      {
+        id: 'rc12',
+        passage:
+          'Teamwork in a government office depends on clear communication. When each member knows the goal and shares information openly, tasks are completed faster and with fewer errors. Problems usually arise not from a lack of skill, but from misunderstandings that could have been avoided with a simple conversation.',
+        text: 'It can be inferred that a "simple conversation" would help mainly by:',
+        options: [
+          'Adding more tasks',
+          'Preventing misunderstandings',
+          'Reducing the number of staff',
+          'Slowing down the work',
+        ],
+        answer: 1,
+        explanation:
+          'Since misunderstandings cause problems and "could have been avoided with a simple conversation," such a conversation prevents them.',
       },
     ],
   },
