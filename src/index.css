@@ -384,6 +384,15 @@ button.option:hover:not(:disabled) {
   text-decoration: underline;
 }
 
+.quiz-intro {
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  background: #eef3fa;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #2a3a4d;
+}
+
 .study-toolbar {
   display: flex;
   justify-content: flex-end;
@@ -400,6 +409,14 @@ button.option:hover:not(:disabled) {
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(transparent, var(--bg) 40%);
+  /* The transparent top of the gradient must not steal taps from answer
+     options scrolling underneath it (critical on short mobile viewports). */
+  pointer-events: none;
+}
+
+/* Re-enable interaction only on the footer's actual controls. */
+.quiz-footer > * {
+  pointer-events: auto;
 }
 
 .progress-text {
