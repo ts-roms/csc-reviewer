@@ -13,3 +13,10 @@ export function OptionFigure({ svg }) {
     <span className="option-figure" dangerouslySetInnerHTML={{ __html: svg }} />
   )
 }
+
+// Sentence-length options read better as a single-column list; short labels
+// (words, numbers, short phrases) look better as a 2-column tile grid.
+const LONG_OPTION_CHARS = 30
+export function hasLongOptions(options) {
+  return options.some((o) => typeof o === 'string' && o.length > LONG_OPTION_CHARS)
+}

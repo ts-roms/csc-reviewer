@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Figure, OptionFigure } from './Figure.jsx'
+import { Figure, OptionFigure, hasLongOptions } from './Figure.jsx'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E']
 
@@ -29,6 +29,7 @@ function StudyQuestion({ q, number, forceShow }) {
   const show = forceShow || revealed
 
   const wide = q.passage || q.figure || q.optionFigures
+  const longOptions = !q.optionFigures && hasLongOptions(q.options)
 
   return (
     <li className={wide ? 'card card-wide' : 'card'}>
@@ -38,7 +39,15 @@ function StudyQuestion({ q, number, forceShow }) {
       </p>
       <Figure svg={q.figure} />
 
-      <ul className={q.optionFigures ? 'options study-options options-figure' : 'options study-options'}>
+      <ul
+        className={
+          q.optionFigures
+            ? 'options study-options options-figure'
+            : longOptions
+              ? 'options study-options options-list'
+              : 'options study-options'
+        }
+      >
         {q.options.map((opt, idx) => {
           const correct = idx === q.answer
           return (
@@ -52,7 +61,7 @@ function StudyQuestion({ q, number, forceShow }) {
               ) : (
                 <span>{opt}</span>
               )}
-              {show && correct && <span className="badge">✓ Answer</span>}
+              {show && correct && <span className="badge">✓</span>}
             </li>
           )
         })}

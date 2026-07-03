@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { allQuestions } from '../data/questions.js'
-import { Figure, OptionFigure } from './Figure.jsx'
+import { Figure, OptionFigure, hasLongOptions } from './Figure.jsx'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E']
 
@@ -171,7 +171,15 @@ export default function MockExam() {
               </p>
               <Figure svg={q.figure} />
 
-              <ul className={q.optionFigures ? 'options options-figure' : 'options'}>
+              <ul
+                className={
+                  q.optionFigures
+                    ? 'options options-figure'
+                    : hasLongOptions(q.options)
+                      ? 'options options-list'
+                      : 'options'
+                }
+              >
                 {q.options.map((opt, idx) => {
                   const isChosen = chosen === idx
                   const isCorrect = idx === q.answer

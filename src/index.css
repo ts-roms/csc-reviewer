@@ -354,6 +354,12 @@ body {
   align-items: stretch;
 }
 
+/* Long (sentence-length) options read better as a single-column list. The
+   view adds `.options-list` when any option is long; short options stay tiled. */
+.options-list {
+  grid-template-columns: 1fr;
+}
+
 /* In Quiz/Mock the option button is wrapped in an <li>; make it fill the tile
    so tiles in a row share the same height. */
 .options > li {
@@ -445,6 +451,7 @@ body {
   background: #fafbfd;
   font-size: 14.5px;
   color: var(--text);
+  position: relative;
 }
 
 button.option {
@@ -493,15 +500,34 @@ button.option:hover:not(:disabled) {
   background: var(--red);
 }
 
+/* Correct/incorrect marker pinned to the top-right corner of the option box */
 .badge {
-  margin-left: auto;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--green);
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .badge-x {
-  color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+
+/* Reserve room on the right so option text never runs under the corner badge */
+.option.correct,
+.option.wrong {
+  padding-right: 32px;
 }
 
 /* ---------- Explanation ---------- */
@@ -841,10 +867,6 @@ button.option:hover:not(:disabled) {
     grid-template-columns: 1fr;
   }
   .question-list {
-    grid-template-columns: 1fr;
-  }
-  /* Long-option cards (passages/reading comp) stack their tiles on mobile */
-  .card-wide .options:not(.options-figure) {
     grid-template-columns: 1fr;
   }
 }

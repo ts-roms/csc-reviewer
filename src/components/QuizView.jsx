@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Figure, OptionFigure } from './Figure.jsx'
+import { Figure, OptionFigure, hasLongOptions } from './Figure.jsx'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E']
 const BATCH_SIZE = 25 // items per questionnaire
@@ -113,7 +113,15 @@ export default function QuizView({ section, onActiveChange }) {
               </p>
               <Figure svg={q.figure} />
 
-              <ul className={q.optionFigures ? 'options options-figure' : 'options'}>
+              <ul
+                className={
+                  q.optionFigures
+                    ? 'options options-figure'
+                    : hasLongOptions(q.options)
+                      ? 'options options-list'
+                      : 'options'
+                }
+              >
                 {q.options.map((opt, idx) => {
                   const isChosen = chosen === idx
                   const isCorrect = idx === q.answer
