@@ -156,13 +156,18 @@ export default function MockExam() {
           const chosen = answers[q.id]
           const done = phase === 'done'
           return (
-            <li key={q.id} className="card">
+            <li
+              key={q.id}
+              className={
+                q.passage || q.figure || q.optionFigures ? 'card card-wide' : 'card'
+              }
+            >
               <div className="q-head">
                 <span className="q-tag">{q.sectionTitle}</span>
               </div>
               {q.passage && <blockquote className="passage">{q.passage}</blockquote>}
               <p className="q-text">
-                <span className="q-num">{i + 1}.</span> {q.text}
+                <span className="q-num">{i + 1}</span> {q.text}
               </p>
               <Figure svg={q.figure} />
 

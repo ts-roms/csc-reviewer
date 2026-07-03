@@ -28,11 +28,13 @@ function StudyQuestion({ q, number, forceShow }) {
   const [revealed, setRevealed] = useState(false)
   const show = forceShow || revealed
 
+  const wide = q.passage || q.figure || q.optionFigures
+
   return (
-    <li className="card">
+    <li className={wide ? 'card card-wide' : 'card'}>
       {q.passage && <blockquote className="passage">{q.passage}</blockquote>}
       <p className="q-text">
-        <span className="q-num">{number}.</span> {q.text}
+        <span className="q-num">{number}</span> {q.text}
       </p>
       <Figure svg={q.figure} />
 

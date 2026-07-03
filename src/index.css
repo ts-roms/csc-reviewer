@@ -198,22 +198,115 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* ---------- Questions ---------- */
+.mode-toggle button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------- Sections drawer toggle + quiz lock ---------- */
+.content-topbar {
+  display: none; /* shown only on narrow screens */
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.nav-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lock-badge {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #8a5a00;
+  background: #fff3d6;
+  border: 1px solid #f2d98a;
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+
+.nav-lock {
+  margin: 0 0 12px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: #ffdf9a;
+  background: rgba(242, 183, 5, 0.12);
+  border: 1px solid rgba(242, 183, 5, 0.35);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.nav-item:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.sidebar-close {
+  display: none; /* only on narrow screens */
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: #9fb3cc;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.nav-backdrop {
+  display: none;
+}
+
+.progress-hint {
+  color: var(--muted);
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* ---------- Questions (tile grid) ---------- */
 .question-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  align-items: start;
 }
 
 .card {
+  position: relative;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 20px 22px;
   box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(11, 37, 69, 0.13);
+  border-color: #cfe0f2;
+}
+
+/* Cards that carry wide content (passages, charts, figure options) span the row */
+.card-wide {
+  grid-column: 1 / -1;
 }
 
 .passage {
@@ -236,17 +329,38 @@ body {
 }
 
 .q-num {
-  color: var(--accent);
-  margin-right: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 7px;
+  margin-right: 8px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  vertical-align: middle;
 }
 
 .options {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
+  align-items: stretch;
+}
+
+/* In Quiz/Mock the option button is wrapped in an <li>; make it fill the tile
+   so tiles in a row share the same height. */
+.options > li {
+  display: flex;
+}
+.options > li > .option {
+  width: 100%;
 }
 
 /* PWA install prompt (floating toast, bottom-right) */
@@ -688,19 +802,49 @@ button.option:hover:not(:disabled) {
   .app {
     flex-direction: column;
   }
+  /* Sidebar becomes an off-canvas drawer, toggled by the "☰ Sections" button. */
   .sidebar {
-    width: 100%;
-    height: auto;
-    position: static;
-    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 82%;
+    max-width: 320px;
+    height: 100vh;
+    z-index: 60;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  .app.nav-open .sidebar {
+    transform: translateX(0);
+  }
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 20, 38, 0.5);
+    z-index: 55;
+  }
+  .sidebar-close {
+    display: block;
+  }
+  .content-topbar {
+    display: flex;
   }
   .content {
-    padding: 20px 16px 50px;
+    padding: 16px 16px 50px;
   }
   .content-header {
     flex-direction: column;
   }
   .preset-grid {
+    grid-template-columns: 1fr;
+  }
+  .question-list {
+    grid-template-columns: 1fr;
+  }
+  /* Long-option cards (passages/reading comp) stack their tiles on mobile */
+  .card-wide .options:not(.options-figure) {
     grid-template-columns: 1fr;
   }
 }

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Figure, OptionFigure } from './Figure.jsx'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E']
@@ -14,7 +14,7 @@ function shuffle(arr) {
   return a
 }
 
-export default function QuizView({ section }) {
+export default function QuizView({ section, onActiveChange }) {
   // Draw a randomized batch of up to 25 questions from this section.
   const sample = useCallback(
     () => shuffle(section.questions).slice(0, Math.min(BATCH_SIZE, section.questions.length)),
@@ -29,6 +29,16 @@ export default function QuizView({ section }) {
 
   const total = quiz.length
   const answeredCount = Object.keys(answers).length
+  const allAnswered = answeredCount === total
+
+  // A quiz is "in progress" once the user has answered at least one item and
+  // has not yet submitted. While active, the parent locks section switching.
+  const active = answeredCount > 0 && !submitted
+  useEffect(() => {
+    onActiveChange?.(active)
+    // Make sure the lock is released if this view unmounts mid-quiz.
+    return () => onActiveChange?.(false)
+  }, [active, onActiveChange])
 
   const score = quiz.reduce(
     (acc, q) => acc + (answers[q.id] === q.answer ? 1 : 0),
@@ -91,10 +101,15 @@ export default function QuizView({ section }) {
         {quiz.map((q, i) => {
           const chosen = answers[q.id]
           return (
-            <li key={q.id} className="card">
+            <li
+              key={q.id}
+              className={
+                q.passage || q.figure || q.optionFigures ? 'card card-wide' : 'card'
+              }
+            >
               {q.passage && <blockquote className="passage">{q.passage}</blockquote>}
               <p className="q-text">
-                <span className="q-num">{i + 1}.</span> {q.text}
+                <span className="q-num">{i + 1}</span> {q.text}
               </p>
               <Figure svg={q.figure} />
 
@@ -151,11 +166,21 @@ export default function QuizView({ section }) {
         <div className="quiz-footer">
           <span className="progress-text">
             {answeredCount} of {total} answered
+            {!allAnswered && (
+              <em className="progress-hint">
+                {' '}· answer all items to submit
+              </em>
+            )}
           </span>
           <button
             className="btn btn-primary"
             onClick={handleSubmit}
-            disabled={answeredCount === 0}
+            disabled={!allAnswered}
+            title={
+              allAnswered
+                ? 'Submit your answers'
+                : `Answer all ${total} questions first (${total - answeredCount} left)`
+            }
           >
             Submit &amp; show answers
           </button>

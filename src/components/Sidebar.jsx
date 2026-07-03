@@ -1,4 +1,17 @@
-export default function Sidebar({ sections, activeId, onSelect, totalQuestions }) {
+export default function Sidebar({
+  sections,
+  activeId,
+  onSelect,
+  totalQuestions,
+  locked = false,
+  onClose,
+}) {
+  // While a quiz is in progress, section switching is disabled.
+  function pick(id) {
+    if (locked) return
+    onSelect(id)
+  }
+
   return (
     <aside className="sidebar">
       <div className="brand">
@@ -7,7 +20,18 @@ export default function Sidebar({ sections, activeId, onSelect, totalQuestions }
           <h2>CSC Exam Review</h2>
           <small>Civil Service Commission · Philippines</small>
         </div>
+        <button
+          className="sidebar-close"
+          onClick={onClose}
+          aria-label="Close sections menu"
+        >
+          ✕
+        </button>
       </div>
+
+      {locked && (
+        <p className="nav-lock">🔒 Finish and submit your quiz to switch sections.</p>
+      )}
 
       <nav>
         <p className="nav-label">Sections</p>
@@ -16,7 +40,8 @@ export default function Sidebar({ sections, activeId, onSelect, totalQuestions }
             <li key={s.id}>
               <button
                 className={s.id === activeId ? 'nav-item active' : 'nav-item'}
-                onClick={() => onSelect(s.id)}
+                onClick={() => pick(s.id)}
+                disabled={locked && s.id !== activeId}
               >
                 <span className="nav-icon">{s.icon}</span>
                 <span className="nav-text">
@@ -32,7 +57,8 @@ export default function Sidebar({ sections, activeId, onSelect, totalQuestions }
       <p className="nav-label" style={{ marginTop: 18 }}>Exam</p>
       <button
         className={activeId === 'mock' ? 'nav-item mock active' : 'nav-item mock'}
-        onClick={() => onSelect('mock')}
+        onClick={() => pick('mock')}
+        disabled={locked && activeId !== 'mock'}
       >
         <span className="nav-icon">⏱️</span>
         <span className="nav-text">

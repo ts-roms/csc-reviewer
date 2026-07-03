@@ -11,6 +11,11 @@ export default function App() {
   const [activeId, setActiveId] = useState(sections[0].id)
   // 'study' = see questions + answer key; 'quiz' = answer then get scored
   const [mode, setMode] = useState('study')
+  // Sidebar visibility (used on narrow screens; always shown on desktop via CSS)
+  const [navOpen, setNavOpen] = useState(false)
+  // True while a quiz is being answered (started, not yet submitted).
+  // While active, the section and mode cannot be changed.
+  const [quizActive, setQuizActive] = useState(false)
 
   const isMock = activeId === 'mock'
 
@@ -19,16 +24,50 @@ export default function App() {
     [activeId],
   )
 
+  function selectSection(id) {
+    if (quizActive) return // locked mid-quiz
+    setActiveId(id)
+    setQuizActive(false)
+    setNavOpen(false) // collapse the menu after choosing a topic
+  }
+
+  function changeMode(m) {
+    if (quizActive) return // locked mid-quiz
+    setMode(m)
+  }
+
   return (
-    <div className="app">
+    <div className={navOpen ? 'app nav-open' : 'app'}>
+      {navOpen && (
+        <div className="nav-backdrop" onClick={() => setNavOpen(false)} />
+      )}
+
       <Sidebar
         sections={sections}
         activeId={activeId}
-        onSelect={setActiveId}
+        onSelect={selectSection}
         totalQuestions={totalQuestions}
+        locked={quizActive}
+        onClose={() => setNavOpen(false)}
       />
 
       <main className="content">
+        <div className="content-topbar">
+          <button
+            className="nav-toggle"
+            onClick={() => setNavOpen(true)}
+            disabled={quizActive}
+            title={
+              quizActive
+                ? 'Finish and submit your quiz to switch sections'
+                : 'Browse sections'
+            }
+          >
+            ☰ Sections
+          </button>
+          {quizActive && <span className="lock-badge">🔒 Quiz in progress</span>}
+        </div>
+
         {isMock ? (
           <MockExam />
         ) : (
@@ -46,7 +85,11 @@ export default function App() {
                   role="tab"
                   aria-selected={mode === 'study'}
                   className={mode === 'study' ? 'active' : ''}
-                  onClick={() => setMode('study')}
+                  onClick={() => changeMode('study')}
+                  disabled={quizActive}
+                  title={
+                    quizActive ? 'Finish your quiz to switch modes' : undefined
+                  }
                 >
                   📚 Study
                 </button>
@@ -54,7 +97,11 @@ export default function App() {
                   role="tab"
                   aria-selected={mode === 'quiz'}
                   className={mode === 'quiz' ? 'active' : ''}
-                  onClick={() => setMode('quiz')}
+                  onClick={() => changeMode('quiz')}
+                  disabled={quizActive}
+                  title={
+                    quizActive ? 'Finish your quiz to switch modes' : undefined
+                  }
                 >
                   📝 Quiz
                 </button>
@@ -65,7 +112,11 @@ export default function App() {
               <StudyView section={activeSection} />
             ) : (
               // key forces a fresh quiz (reset answers) when switching sections
-              <QuizView key={activeSection.id} section={activeSection} />
+              <QuizView
+                key={activeSection.id}
+                section={activeSection}
+                onActiveChange={setQuizActive}
+              />
             )}
           </>
         )}
