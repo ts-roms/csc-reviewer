@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar.jsx'
 import StudyView from './components/StudyView.jsx'
 import QuizView from './components/QuizView.jsx'
 import MockExam from './components/MockExam.jsx'
+import InstallButton from './components/InstallButton.jsx'
 
 export default function App() {
   // activeId is a section id, or 'mock' for the mock exam
@@ -69,6 +70,8 @@ export default function App() {
           </>
         )}
       </main>
+
+      <InstallButton />
     </div>
   )
 }

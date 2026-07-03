@@ -249,6 +249,76 @@ body {
   gap: 8px;
 }
 
+/* PWA install prompt (floating toast, bottom-right) */
+.install-toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 50;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(11, 37, 69, 0.18);
+}
+
+.install-text {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.install-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 560px) {
+  .install-toast {
+    right: 12px;
+    left: 12px;
+    bottom: 12px;
+    max-width: none;
+  }
+}
+
+/* Question graphic (charts, figure series, etc.) */
+.figure {
+  margin: 0 0 16px;
+  padding: 14px;
+  display: flex;
+  justify-content: center;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.figure svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Visual answer options (abstract reasoning) lay out as a grid of tiles */
+.options-figure {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.option-figure {
+  display: inline-flex;
+  align-items: center;
+}
+
+.option-figure svg {
+  display: block;
+}
+
 .option {
   display: flex;
   align-items: center;

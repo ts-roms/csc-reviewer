@@ -4,6 +4,25 @@
 //
 // Each question:
 //   { id, text, options: [..], answer: <0-based index of correct option>, explanation }
+//
+// Some questions also carry visual data:
+//   figure        — inline SVG shown below the question text (charts, diagrams)
+//   optionFigures — array of inline SVGs, one per option (abstract reasoning)
+
+import {
+  salesBarChart,
+  budgetPie,
+  tempLineGraph,
+  triangleCount,
+  dotSeriesPrompt,
+  dotTile,
+  arrowSeriesPrompt,
+  arrowTile,
+  shapeSquare,
+  shapeDiamond,
+  shapeRectangle,
+  shapeTriangle,
+} from './figures.js'
 
 export const sections = [
   {
@@ -2468,6 +2487,458 @@ export const sections = [
         answer: 1,
         explanation:
           'Since misunderstandings cause problems and "could have been avoided with a simple conversation," such a conversation prevents them.',
+      },
+    ],
+  },
+  {
+    id: 'logical',
+    title: 'Logical Reasoning',
+    description:
+      'Syllogisms, logical deduction, number/letter series, coding-decoding, blood relations, direction sense, and statement–conclusion reasoning.',
+    icon: '♟️',
+    questions: [
+      {
+        id: 'lr1',
+        text: 'All engineers are graduates. Some graduates are managers. Which conclusion is valid?',
+        options: [
+          'All engineers are managers.',
+          'Some engineers are managers.',
+          'Some graduates are engineers.',
+          'No engineer is a manager.',
+        ],
+        answer: 2,
+        explanation:
+          'If all engineers are graduates, then that subset of graduates who are engineers exists, so "some graduates are engineers" must be true. The overlap between engineers and managers is not established.',
+      },
+      {
+        id: 'lr2',
+        text: 'No cat is a dog. All dogs are animals. Therefore:',
+        options: [
+          'No cat is an animal.',
+          'Some animals are not cats.',
+          'All animals are dogs.',
+          'Some cats are dogs.',
+        ],
+        answer: 1,
+        explanation:
+          'Since all dogs are animals and no cat is a dog, those dogs are animals that are not cats — so "some animals are not cats" is valid.',
+      },
+      {
+        id: 'lr3',
+        text: 'Find the next number in the series: 2, 6, 12, 20, 30, ___',
+        options: ['36', '40', '42', '44'],
+        answer: 2,
+        explanation:
+          'Differences increase by 2 each time: +4, +6, +8, +10, then +12. So 30 + 12 = 42. (Pattern is n(n+1): 1·2, 2·3, 3·4, 4·5, 5·6, 6·7 = 42.)',
+      },
+      {
+        id: 'lr4',
+        text: 'Find the next number: 3, 6, 11, 18, 27, ___',
+        options: ['36', '38', '40', '35'],
+        answer: 1,
+        explanation:
+          'Differences are 3, 5, 7, 9, then 11 (odd numbers). So 27 + 11 = 38.',
+      },
+      {
+        id: 'lr5',
+        text: 'Complete the letter series: A, C, F, J, O, ___',
+        options: ['S', 'T', 'U', 'R'],
+        answer: 2,
+        explanation:
+          'Gaps between letters grow by one: +2 (A→C), +3 (C→F), +4 (F→J), +5 (J→O), then +6 (O→U). So the next letter is U.',
+      },
+      {
+        id: 'lr6',
+        text: 'If in a code MANGO is written as NBOHP, how is APPLE written?',
+        options: ['BQQMF', 'BQMQF', 'BPQMF', 'AQQMF'],
+        answer: 0,
+        explanation:
+          'Each letter is shifted forward by one (M→N, A→B, ...). APPLE becomes B-Q-Q-M-F = BQQMF.',
+      },
+      {
+        id: 'lr7',
+        text: "In a certain code, 'TABLE' is written as 20-1-2-12-5. How is 'CHAIR' written?",
+        options: ['3-8-1-9-18', '3-8-1-8-18', '3-9-1-9-18', '4-8-1-9-18'],
+        answer: 0,
+        explanation:
+          'Each letter is replaced by its position in the alphabet: C=3, H=8, A=1, I=9, R=18 → 3-8-1-9-18.',
+      },
+      {
+        id: 'lr8',
+        text: 'Pointing to a photograph, a man said, "She is the daughter of my grandfather\'s only son." How is the girl related to the man?',
+        options: ['Sister', 'Daughter', 'Cousin', 'Niece'],
+        answer: 0,
+        explanation:
+          "The grandfather's only son is the man's own father. The father's daughter is the man's sister.",
+      },
+      {
+        id: 'lr9',
+        text: 'A is the brother of B. B is the sister of C. C is the father of D. How is A related to D?',
+        options: ['Father', 'Uncle', 'Brother', 'Grandfather'],
+        answer: 1,
+        explanation:
+          'A and C are siblings (both siblings of B). C is D\'s parent, so A is D\'s uncle.',
+      },
+      {
+        id: 'lr10',
+        text: 'A man walks 5 km north, turns right and walks 3 km, then turns right again and walks 5 km. How far is he from the starting point?',
+        options: ['3 km', '5 km', '8 km', '13 km'],
+        answer: 0,
+        explanation:
+          'North 5, east 3, south 5 returns him to the starting latitude but 3 km east — so he is 3 km from the start.',
+      },
+      {
+        id: 'lr11',
+        text: 'Facing east, Ana turns 90° clockwise, then 180° anticlockwise, then 90° clockwise. Which direction is she now facing?',
+        options: ['North', 'South', 'East', 'West'],
+        answer: 2,
+        explanation:
+          'East +90° CW = South; South −180° = North; North +90° CW = East. She faces East again.',
+      },
+      {
+        id: 'lr12',
+        text: 'If all Bloops are Razzies and all Razzies are Lazzies, which statement must be true?',
+        options: [
+          'All Lazzies are Bloops.',
+          'All Bloops are Lazzies.',
+          'Some Lazzies are not Razzies.',
+          'No Bloop is a Lazzie.',
+        ],
+        answer: 1,
+        explanation:
+          'Transitivity: Bloops ⊆ Razzies ⊆ Lazzies, so every Bloop is a Lazzie.',
+      },
+      {
+        id: 'lr13',
+        text: 'Statement: "Practice makes a person perfect." Conclusion best supported:',
+        options: [
+          'People who do not practice are never good at anything.',
+          'Regular practice improves performance.',
+          'Perfect people never practice.',
+          'Practice is the only thing that matters in life.',
+        ],
+        answer: 1,
+        explanation:
+          'The statement implies practice leads toward perfection, i.e., regular practice improves performance. The others overstate or contradict it.',
+      },
+      {
+        id: 'lr14',
+        text: 'If it rains, the match will be cancelled. The match was NOT cancelled. Therefore:',
+        options: [
+          'It rained.',
+          'It did not rain.',
+          'The match was postponed.',
+          'It may or may not have rained.',
+        ],
+        answer: 1,
+        explanation:
+          'By modus tollens: "if rain then cancelled" plus "not cancelled" forces "it did not rain."',
+      },
+      {
+        id: 'lr15',
+        text: 'All the students who passed studied hard. Ramon did not pass. Which conclusion is valid?',
+        options: [
+          'Ramon did not study hard.',
+          'Ramon may or may not have studied hard.',
+          'Ramon studied hard.',
+          'Everyone who studies hard passes.',
+        ],
+        answer: 1,
+        explanation:
+          '"Passed → studied hard" does not mean "studied hard → passed." Not passing tells us nothing certain about Ramon\'s studying, so he may or may not have studied hard.',
+      },
+      {
+        id: 'lr16',
+        text: 'Find the odd one out: 3, 5, 11, 14, 17, 23',
+        options: ['11', '14', '17', '23'],
+        answer: 1,
+        explanation:
+          'All are prime numbers except 14 (= 2 × 7), which is composite.',
+      },
+      {
+        id: 'lr17',
+        text: 'In a row of children, Miguel is 7th from the left and 12th from the right. How many children are in the row?',
+        options: ['17', '18', '19', '20'],
+        answer: 1,
+        explanation:
+          'Total = left position + right position − 1 = 7 + 12 − 1 = 18.',
+      },
+      {
+        id: 'lr18',
+        text: 'If MONDAY is coded as 123456 and DAY as 456, then how is MAY coded?',
+        options: ['156', '126', '136', '146'],
+        answer: 0,
+        explanation:
+          'From MONDAY: M=1, O=2, N=3, D=4, A=5, Y=6. So MAY = 1-5-6 = 156.',
+      },
+      {
+        id: 'lr19',
+        text: 'Six people P, Q, R, S, T, U sit in a row. P is not at either end. If Q is at the left end, which is a possible position for P?',
+        options: [
+          'First from left',
+          'Second from left',
+          'Sixth from left',
+          'None of these',
+        ],
+        answer: 1,
+        explanation:
+          'Q occupies the left end (position 1). P cannot be at position 1 or 6 (the ends), so among the choices only "second from left" is valid for P.',
+      },
+      {
+        id: 'lr20',
+        text: 'Some pens are pencils. All pencils are erasers. Which conclusion follows?',
+        options: [
+          'All pens are erasers.',
+          'Some pens are erasers.',
+          'No pen is an eraser.',
+          'All erasers are pens.',
+        ],
+        answer: 1,
+        explanation:
+          'The pens that are pencils are also erasers (since all pencils are erasers), so "some pens are erasers" must be true.',
+      },
+      {
+        id: 'lr21',
+        text: 'Study the bar chart. In which month were sales the highest?',
+        figure: salesBarChart,
+        options: ['January', 'February', 'March', 'April'],
+        answer: 2,
+        explanation: 'March has the tallest bar at 55 units — the highest of the four months.',
+      },
+      {
+        id: 'lr22',
+        text: 'Using the same sales chart, by how many units did sales increase from February to March?',
+        figure: salesBarChart,
+        options: ['20', '25', '30', '35'],
+        answer: 2,
+        explanation: 'February = 25 and March = 55, so the increase is 55 − 25 = 30 units.',
+      },
+      {
+        id: 'lr23',
+        text: 'From the sales chart, how many months had sales above 35 units?',
+        figure: salesBarChart,
+        options: ['1', '2', '3', '4'],
+        answer: 1,
+        explanation: 'Only January (40) and March (55) exceed 35 units — that is 2 months.',
+      },
+      {
+        id: 'lr24',
+        text: 'The pie chart shows a monthly budget. Which category takes the largest share?',
+        figure: budgetPie,
+        options: ['Food', 'Rent', 'Savings', 'Others'],
+        answer: 0,
+        explanation: 'Food occupies 50% of the pie — a larger share than Rent (25%), Savings (15%), or Others (10%).',
+      },
+      {
+        id: 'lr25',
+        text: 'If the total budget in the pie chart is ₱20,000, how much is allotted to Rent?',
+        figure: budgetPie,
+        options: ['₱2,000', '₱3,000', '₱5,000', '₱10,000'],
+        answer: 2,
+        explanation: 'Rent is 25% of the budget: 0.25 × ₱20,000 = ₱5,000.',
+      },
+      {
+        id: 'lr26',
+        text: 'The line graph shows daily temperature. On which day was the temperature highest?',
+        figure: tempLineGraph,
+        options: ['Monday', 'Tuesday', 'Wednesday', 'Friday'],
+        answer: 2,
+        explanation: 'The line peaks on Wednesday at 30°C, the highest point on the graph.',
+      },
+      {
+        id: 'lr27',
+        text: 'From the temperature graph, between which two consecutive days did the temperature rise the most?',
+        figure: tempLineGraph,
+        options: ['Mon → Tue', 'Tue → Wed', 'Wed → Thu', 'Thu → Fri'],
+        answer: 1,
+        explanation: 'Tuesday (24°C) to Wednesday (30°C) is a rise of 6°C — the steepest upward change on the graph.',
+      },
+      {
+        id: 'lr28',
+        text: 'Look at the pattern. Each box adds one dot. Which figure comes next?',
+        figure: dotSeriesPrompt,
+        optionFigures: [dotTile(4), dotTile(5), dotTile(6), dotTile(3)],
+        options: ['', '', '', ''],
+        answer: 0,
+        explanation: 'The dots increase 1, 2, 3, so the next figure must contain 4 dots.',
+      },
+      {
+        id: 'lr29',
+        text: 'The arrow turns 90° clockwise each step (up → right → down → …). Which arrow comes next?',
+        figure: arrowSeriesPrompt,
+        optionFigures: [arrowTile(270), arrowTile(0), arrowTile(90), arrowTile(180)],
+        options: ['', '', '', ''],
+        answer: 0,
+        explanation: 'After up, right, down, a further 90° clockwise turn points the arrow to the left.',
+      },
+      {
+        id: 'lr30',
+        text: 'How many triangles are in the figure shown?',
+        figure: triangleCount,
+        options: ['2', '3', '4', '5'],
+        answer: 1,
+        explanation: 'The line from the top vertex to the base makes a left triangle and a right triangle, plus the large outer triangle — 3 in all.',
+      },
+      {
+        id: 'lr31',
+        text: 'Which figure is the odd one out?',
+        optionFigures: [shapeSquare, shapeDiamond, shapeRectangle, shapeTriangle],
+        options: ['', '', '', ''],
+        answer: 3,
+        explanation: 'The square, diamond, and rectangle each have four sides; the triangle has only three, so it is the odd one out.',
+      },
+      {
+        id: 'lr32',
+        text: 'Find the next number: 1, 4, 9, 16, 25, ___',
+        options: ['30', '32', '36', '49'],
+        answer: 2,
+        explanation: 'These are perfect squares (1², 2², 3², 4², 5²); the next is 6² = 36.',
+      },
+      {
+        id: 'lr33',
+        text: 'Find the next number: 1, 1, 2, 3, 5, 8, ___',
+        options: ['11', '12', '13', '15'],
+        answer: 2,
+        explanation: 'Fibonacci sequence — each term is the sum of the two before it: 5 + 8 = 13.',
+      },
+      {
+        id: 'lr34',
+        text: 'Find the missing number: 7, 14, 28, 56, ___',
+        options: ['84', '96', '112', '128'],
+        answer: 2,
+        explanation: 'Each term doubles the previous one: 56 × 2 = 112.',
+      },
+      {
+        id: 'lr35',
+        text: "If 'FRIEND' is coded as 'GSJFOE', how is 'MOTHER' coded?",
+        options: ['NPUIFS', 'NPUJFS', 'LNSGDQ', 'NPTIFS'],
+        answer: 0,
+        explanation: 'Each letter moves one step forward in the alphabet: M→N, O→P, T→U, H→I, E→F, R→S = NPUIFS.',
+      },
+      {
+        id: 'lr36',
+        text: "In a code, '5' means 'apple', '3' means 'red', and '8' means 'sweet'. If '3-5-8' means 'red sweet apple', what does '5' stand for?",
+        options: ['red', 'sweet', 'apple', 'cannot be determined'],
+        answer: 2,
+        explanation: "The key states 5 = apple directly; the phrase order just rearranges the same words.",
+      },
+      {
+        id: 'lr37',
+        text: 'A is taller than B. C is taller than A. D is shorter than B. Who is the tallest?',
+        options: ['A', 'B', 'C', 'D'],
+        answer: 2,
+        explanation: 'C > A > B > D, so C is the tallest.',
+      },
+      {
+        id: 'lr38',
+        text: 'In a class, Rosa ranks 5th from the top and 20th from the bottom. How many students are in the class?',
+        options: ['23', '24', '25', '26'],
+        answer: 1,
+        explanation: 'Total = 5 + 20 − 1 = 24 students (Rosa is counted once in both ranks).',
+      },
+      {
+        id: 'lr39',
+        text: 'Introducing a man, a woman said, "His mother is the only daughter of my mother." How is the woman related to the man?',
+        options: ['Grandmother', 'Mother', 'Sister', 'Aunt'],
+        answer: 1,
+        explanation: '"The only daughter of my mother" is the woman herself, so she is the man\'s mother.',
+      },
+      {
+        id: 'lr40',
+        text: 'A clock shows 3:00. Through how many degrees does the minute hand turn by 3:15?',
+        options: ['45°', '60°', '90°', '180°'],
+        answer: 2,
+        explanation: 'The minute hand sweeps 360° in 60 minutes, i.e. 6° per minute. In 15 minutes it turns 15 × 6° = 90°.',
+      },
+      {
+        id: 'lr41',
+        text: 'If today is Wednesday, what day will it be after 30 days?',
+        options: ['Thursday', 'Friday', 'Saturday', 'Sunday'],
+        answer: 1,
+        explanation: '30 ÷ 7 leaves a remainder of 2, so the day advances 2 places from Wednesday → Friday.',
+      },
+      {
+        id: 'lr42',
+        text: 'Walking towards the sunrise, Ben turns left. Which direction is he now facing?',
+        options: ['North', 'South', 'East', 'West'],
+        answer: 0,
+        explanation: 'The sun rises in the east, so Ben faced east; a left turn from east faces him north.',
+      },
+      {
+        id: 'lr43',
+        text: 'Some doctors are teachers. All teachers are graduates. Which conclusion follows?',
+        options: [
+          'All doctors are graduates.',
+          'Some doctors are graduates.',
+          'No doctor is a graduate.',
+          'All graduates are doctors.',
+        ],
+        answer: 1,
+        explanation: 'The doctors who are teachers are graduates (all teachers are graduates), so "some doctors are graduates" holds.',
+      },
+      {
+        id: 'lr44',
+        text: 'Statement: Only members are allowed inside the hall. Assumption behind this statement:',
+        options: [
+          'Non-members might try to enter the hall.',
+          'The hall is always empty.',
+          'Members never enter the hall.',
+          'Everyone in the city is a member.',
+        ],
+        answer: 0,
+        explanation: 'Restricting entry to members only makes sense if non-members might otherwise try to enter — that is the underlying assumption.',
+      },
+      {
+        id: 'lr45',
+        text: 'Either the report is late or the printer is broken. The printer is working fine. Therefore:',
+        options: [
+          'The report is late.',
+          'The report is on time.',
+          'The printer is broken.',
+          'Nothing can be concluded.',
+        ],
+        answer: 0,
+        explanation: 'In an "either/or" with one option ruled out (the printer works), the other must be true: the report is late.',
+      },
+      {
+        id: 'lr46',
+        text: 'Pointing to a boy, Lita said, "He is the son of my grandfather\'s only child." How is the boy related to Lita?',
+        options: ['Brother', 'Cousin', 'Uncle', 'Nephew'],
+        answer: 0,
+        explanation: "Her grandfather's only child is Lita's parent, whose son is Lita's brother.",
+      },
+      {
+        id: 'lr47',
+        text: 'Find the odd one out: 8, 27, 64, 100, 125',
+        options: ['27', '64', '100', '125'],
+        answer: 2,
+        explanation: 'All are perfect cubes (2³, 3³, 4³, 5³) except 100, which is a perfect square, not a cube.',
+      },
+      {
+        id: 'lr48',
+        text: 'P is the son of Q. Q is the sister of R. R has a daughter S. How is P related to S?',
+        options: ['Brother', 'Cousin', 'Uncle', 'Father'],
+        answer: 1,
+        explanation: 'Q and R are siblings; P (Q\'s son) and S (R\'s daughter) are children of siblings, so they are cousins.',
+      },
+      {
+        id: 'lr49',
+        text: '"All good students submit their work on time. Carla submitted her work late." A logical conclusion is:',
+        options: [
+          'Carla is not a good student.',
+          'Carla is a good student.',
+          'Carla never studies.',
+          'All students submit late.',
+        ],
+        answer: 0,
+        explanation: 'If every good student submits on time, then submitting late means Carla fails that condition — so she is not (by this rule) a good student.',
+      },
+      {
+        id: 'lr50',
+        text: 'Complete the analogy: HAND is to GLOVE as FOOT is to ___',
+        options: ['Sock', 'Shoe', 'Toe', 'Leg'],
+        answer: 1,
+        explanation: 'A glove is the outer covering worn on a hand; the corresponding covering worn on a foot is a shoe.',
       },
     ],
   },

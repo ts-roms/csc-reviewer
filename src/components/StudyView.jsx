@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Figure, OptionFigure } from './Figure.jsx'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E']
 
@@ -33,8 +34,9 @@ function StudyQuestion({ q, number, forceShow }) {
       <p className="q-text">
         <span className="q-num">{number}.</span> {q.text}
       </p>
+      <Figure svg={q.figure} />
 
-      <ul className="options study-options">
+      <ul className={q.optionFigures ? 'options study-options options-figure' : 'options study-options'}>
         {q.options.map((opt, idx) => {
           const correct = idx === q.answer
           return (
@@ -43,7 +45,11 @@ function StudyQuestion({ q, number, forceShow }) {
               className={show && correct ? 'option correct' : 'option'}
             >
               <span className="opt-letter">{LETTERS[idx]}</span>
-              <span>{opt}</span>
+              {q.optionFigures ? (
+                <OptionFigure svg={q.optionFigures[idx]} />
+              ) : (
+                <span>{opt}</span>
+              )}
               {show && correct && <span className="badge">✓ Answer</span>}
             </li>
           )

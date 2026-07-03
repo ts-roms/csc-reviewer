@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { allQuestions } from '../data/questions.js'
+import { Figure, OptionFigure } from './Figure.jsx'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E']
 
@@ -79,7 +80,8 @@ export default function MockExam() {
           <h2>📝 Mock Examination</h2>
           <p>
             A randomized, timed test drawn from <strong>all sections</strong>{' '}
-            (Verbal, Numerical, Analytical, Clerical, and General Information),
+            (Verbal, Numerical, Analytical, Logical Reasoning, Clerical, and
+            General Information),
             mimicking the real CSC exam experience. Passing rating is{' '}
             <strong>80%</strong>.
           </p>
@@ -162,8 +164,9 @@ export default function MockExam() {
               <p className="q-text">
                 <span className="q-num">{i + 1}.</span> {q.text}
               </p>
+              <Figure svg={q.figure} />
 
-              <ul className="options">
+              <ul className={q.optionFigures ? 'options options-figure' : 'options'}>
                 {q.options.map((opt, idx) => {
                   const isChosen = chosen === idx
                   const isCorrect = idx === q.answer
@@ -184,7 +187,11 @@ export default function MockExam() {
                         }
                       >
                         <span className="opt-letter">{LETTERS[idx]}</span>
-                        <span>{opt}</span>
+                        {q.optionFigures ? (
+                          <OptionFigure svg={q.optionFigures[idx]} />
+                        ) : (
+                          <span>{opt}</span>
+                        )}
                         {done && isCorrect && <span className="badge">✓</span>}
                         {done && isChosen && !isCorrect && (
                           <span className="badge badge-x">✗</span>

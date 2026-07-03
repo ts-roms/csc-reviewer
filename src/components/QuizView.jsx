@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { Figure, OptionFigure } from './Figure.jsx'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E']
 const BATCH_SIZE = 25 // items per questionnaire
@@ -95,8 +96,9 @@ export default function QuizView({ section }) {
               <p className="q-text">
                 <span className="q-num">{i + 1}.</span> {q.text}
               </p>
+              <Figure svg={q.figure} />
 
-              <ul className="options">
+              <ul className={q.optionFigures ? 'options options-figure' : 'options'}>
                 {q.options.map((opt, idx) => {
                   const isChosen = chosen === idx
                   const isCorrect = idx === q.answer
@@ -117,7 +119,11 @@ export default function QuizView({ section }) {
                         disabled={submitted}
                       >
                         <span className="opt-letter">{LETTERS[idx]}</span>
-                        <span>{opt}</span>
+                        {q.optionFigures ? (
+                          <OptionFigure svg={q.optionFigures[idx]} />
+                        ) : (
+                          <span>{opt}</span>
+                        )}
                         {submitted && isCorrect && (
                           <span className="badge">✓</span>
                         )}
